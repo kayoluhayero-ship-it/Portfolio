@@ -696,66 +696,42 @@ function app() {
   }
 }
 </script>
-
-/* OKAYBOT FLOATING AI */
-
-.okaybot-ai{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:#FF6B2B;
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:3px;
-    text-decoration:none;
-    z-index:9999;
-    box-shadow:0 10px 30px rgba(255,107,43,.4);
-    transition:.3s ease;
-    overflow:hidden;
-}
-
-.okaybot-ai:hover{
-    transform:translateY(-5px) scale(1.05);
-    background:#FF8F5C;
-}
-
-.okaybot-ai span{
-    font-size:9px;
-    font-weight:700;
-    letter-spacing:.5px;
-}
-
-.okaybot-pulse{
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    background:#FF6B2B;
-    z-index:-1;
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-        opacity:.7;
-    }
-    70%{
-        transform:scale(1.6);
-        opacity:0;
-    }
-    100%{
-        opacity:0;
-    }
-}
   
 <!-- OKAYBOT AI FLOATING BUTTON -->
-<a href="https://wa.me/2348144990299?text=Hello%20Kay%2C%20I%20need%20help%20with%20my%20project."
+<a href="<a href="#" onclick="openBot()" class="okaybot-ai">
+    <div class="okaybot-pulse"></div>
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="28"
+         height="28"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/>
+    </svg>
+
+    <span>OkayBot</span>
+</a>
+
+<script>
+async function openBot() {
+    const res = await fetch("https://YOUR-BACKEND-URL/api/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: "Hello"
+        })
+    });
+
+    const data = await res.json();
+    alert(data.reply);
+}
+</script>."
    target="_blank"
    class="okaybot-ai">
 
