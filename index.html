@@ -76,29 +76,77 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 [x-cloak]{display:none!important}
 
-  /* OKAYBOT PULSE (scoped + safe) */
-.okaybot-ai .okaybot-pulse{
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    background:#FF6B2B;
-    z-index:-1;
-    pointer-events:none;
-    animation: okaybot-pulse-animation 2s infinite;
+ /* OKAYBOT FLOATING AI - ISOLATED */
+
+.okaybot-ai{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #FF6B2B;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(255,107,43,.4);
+    transition: .3s ease;
+    overflow: hidden;
+
+    /* 🔥 CRITICAL FIX: isolate animations & stacking */
+    position: fixed;
+    isolation: isolate;
+    contain: layout paint;
 }
 
-/* renamed keyframes to avoid conflicts */
-@keyframes okaybot-pulse-animation{
+.okaybot-ai:hover{
+    transform: translateY(-5px) scale(1.05);
+    background: #FF8F5C;
+}
+
+/* TEXT */
+.okaybot-ai span{
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ICON */
+.okaybot-ai svg{
+    position: relative;
+    z-index: 2;
+}
+
+/* PULSE (fully contained, no page leak) */
+.okaybot-ai .okaybot-pulse{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #FF6B2B;
+    z-index: 0;
+    pointer-events: none;
+
+    animation: okaybotPulse 2s infinite;
+}
+
+/* ISOLATED ANIMATION (NO CONFLICTS) */
+@keyframes okaybotPulse{
     0%{
-        transform:scale(1);
-        opacity:.7;
+        transform: scale(1);
+        opacity: .7;
     }
     70%{
-        transform:scale(1.6);
-        opacity:0;
+        transform: scale(1.6);
+        opacity: 0;
     }
     100%{
-        opacity:0;
+        opacity: 0;
     }
 }
   
