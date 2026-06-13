@@ -692,19 +692,25 @@ async function openBot() {
 
     if (!userMessage) return;
 
-    const res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            message: userMessage
-        })
-    });
+    try {
+        const res = await fetch("https://okaybot-ai.vercel.app/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: userMessage
+            })
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    alert(data.reply);
+        alert(data.reply);
+
+    } catch (error) {
+        alert("OkayBot failed to respond. Check backend connection.");
+        console.error(error);
+    }
 }
 </script>
   
