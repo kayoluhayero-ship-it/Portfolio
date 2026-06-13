@@ -76,7 +76,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 [x-cloak]{display:none!important}
 
- /* OKAYBOT FLOATING AI - ISOLATED */
+ /* OKAYBOT FLOATING BUTTON (NO ANIMATION) */
 
 .okaybot-ai{
     position: fixed;
@@ -95,12 +95,9 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     z-index: 9999;
     box-shadow: 0 10px 30px rgba(255,107,43,.4);
     transition: .3s ease;
-    overflow: hidden;
 
-    /* 🔥 CRITICAL FIX: isolate animations & stacking */
-    position: fixed;
-    isolation: isolate;
-    contain: layout paint;
+    /* IMPORTANT: keeps layout stable */
+    overflow: hidden;
 }
 
 .okaybot-ai:hover{
@@ -108,46 +105,17 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     background: #FF8F5C;
 }
 
-/* TEXT */
+/* ICON + TEXT ALWAYS VISIBLE */
+.okaybot-ai svg,
+.okaybot-ai span{
+    position: relative;
+    z-index: 2;
+}
+
 .okaybot-ai span{
     font-size: 9px;
     font-weight: 700;
     letter-spacing: .5px;
-    position: relative;
-    z-index: 2;
-}
-
-/* ICON */
-.okaybot-ai svg{
-    position: relative;
-    z-index: 2;
-}
-
-/* PULSE (fully contained, no page leak) */
-.okaybot-ai .okaybot-pulse{
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: #FF6B2B;
-    z-index: 0;
-    pointer-events: none;
-
-    animation: okaybotPulse 2s infinite;
-}
-
-/* ISOLATED ANIMATION (NO CONFLICTS) */
-@keyframes okaybotPulse{
-    0%{
-        transform: scale(1);
-        opacity: .7;
-    }
-    70%{
-        transform: scale(1.6);
-        opacity: 0;
-    }
-    100%{
-        opacity: 0;
-    }
 }
   
 </style>
@@ -715,8 +683,6 @@ function app() {
 </script>
   
 <a href="#" onclick="openBot()" class="okaybot-ai">
-    
-    <div class="okaybot-pulse"></div>
 
     <svg xmlns="http://www.w3.org/2000/svg"
          width="28"
